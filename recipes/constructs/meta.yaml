@@ -18,6 +18,7 @@ requirements:
   host:
     - pip
     - python
+    - flit
   run:
     - jsii >=1.59.0,<2.0.0
     - publication >=0.0.3
