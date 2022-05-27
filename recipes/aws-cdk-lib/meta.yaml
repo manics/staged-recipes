@@ -1,0 +1,44 @@
+{% set name = "aws-cdk-lib" %}
+{% set version = "2.25.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+build:
+  skip: true  # [py<37]
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/aws-cdk-lib-{{ version }}.tar.gz
+  sha256: 186221d75e18e2a5fe8d43ee3c8ccf944d4cb0b6a50b6c4a4738c1b6b53e8bfc
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - constructs >=10.0.0,<11.0.0
+    - jsii >=1.58.0,<2.0.0
+    - publication >=0.0.3
+    - python
+
+test:
+  imports:
+    - aws_cdk
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/aws/aws-cdk
+  summary: Version 2 of the AWS Cloud Development Kit library
+  dev_url: https://github.com/aws/aws-cdk.git
+  license: Apache-2.0
+  license_file: NOTICE
+
+extra:
+  recipe-maintainers:
+    - manics
