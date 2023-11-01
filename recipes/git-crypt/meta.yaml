@@ -1,0 +1,50 @@
+{% set name = "git-crypt" %}
+{% set version = "0.7.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/AGWA/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 2210a89588169ae9a54988c7fdd9717333f0c6053ff704d335631a387bd3bcff
+
+build:
+  # More info about selectors can be found in the conda-build docs: 
+  # https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#preprocessing-selectors
+  number: 0
+  skip: True  # [win]
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+    - openssl >=3
+  run:
+    - openssl >=3
+
+test:
+  commands:
+    - git-crypt --version
+
+about:
+  home: https://github.com/AGWA/git-crypt
+  summary:  Transparent file encryption in git
+  description: |
+    git-crypt enables transparent encryption and decryption of files in a git
+    repository. Files which you choose to protect are encrypted when
+    committed, and decrypted when checked out. git-crypt lets you freely share
+    a repository containing a mix of public and private content. git-crypt
+    gracefully degrades, so developers without the secret key can still clone
+    and commit to a repository with encrypted files. This lets you store your
+    secret material (such as keys or passwords) in the same repository as your
+    code, without requiring you to lock down your entire repository.
+  license: GPL-3.0-only
+  license_family: GPL
+  license_file: COPYING
+  doc_url: https://www.agwa.name/projects/git-crypt/
+  dev_url: https://github.com/AGWA/git-crypt
+
+extra:
+  recipe-maintainers:
+    - manics

@@ -1,0 +1,7 @@
+#!/bin/sh
+set -eu
+
+CXXFLAGS="${CXXFLAGS} -DOPENSSL_API_COMPAT=0x30000000L"
+
+make CXXFLAGS="${CXXFLAGS}"
+make install PREFIX="${PREFIX}"
